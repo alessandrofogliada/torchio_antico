@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Menu Pizzeria</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Menu Pizzeria</h1>
+    <div class="language-selector">
+      <button onclick="setLanguage('it')">🇮🇹 IT</button>
+      <button onclick="setLanguage('en')">🇬🇧 EN</button>
+      <button onclick="setLanguage('de')">🇩🇪 DE</button>
+    </div>
+  </header>
+
+  <main>
+            <!-- Barra di navigazione tra le categorie -->
+        <nav class="main-nav">
+            <button class="nav-btn" data-cat="Pizze">Pizze</button>
+            <button class="nav-btn" data-cat="OltreAllaPizza">Oltre alla pizza</button>
+            <button class="nav-btn" data-cat="Cucina">Cucina</button>
+            <button class="nav-btn" data-cat="Bambini">Per i Vostri Bambini</button>
+            <button class="nav-btn" data-cat="Dessert">Dessert</button>
+            <button class="nav-btn" data-cat="Bevande">Bevande</button>
+            <button class="nav-btn" data-cat="Birre">Birra</button>
+            <button class="nav-btn" data-cat="Vino">Vino</button>
+            <button class="nav-btn" data-cat="Amari">Amari</button>
+        </nav>
+        
+        <!-- Contenitore dove stampare il contenuto -->
+        <div id="menu-content"></div>
+        
+        
+            <section id="menu"></section>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>
