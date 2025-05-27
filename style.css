@@ -28,7 +28,7 @@ body {
     background: #f3f3f3;
   }
 
-  
+
   
   /* Bottoni del menu */
   .nav-btn {
@@ -51,20 +51,54 @@ body {
     padding: 0.5rem;
     font-size: 1rem;
   }
+
   
   /* Contenuto menu */
   .menu-item {
     background: #fff;
     margin: 1rem;
     padding: 1rem;
+    min-height: 1.5em;
     border: 1px solid #eee;
     border-radius: 8px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.1);
   }
   
   .menu-item h3 {
-    margin-top: 0;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
   }
+  
+  .menu-item p {
+    font-size: 1rem;
+    margin: 0.25rem 0;
+  }
+  
+
+
+  /* INFO E ORARI  */
+
+  #extra-info {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .info-box {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+
+
+  #cucina-info {
+    margin-top: 20px;
+  }
+  
+  
+
   
   /* 🔻 MEDIA QUERY PER MOBILE */
   @media (max-width: 768px) {
