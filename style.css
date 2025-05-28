@@ -12,8 +12,6 @@ body {
     background: #e74c3c;
     color: white;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     flex-wrap: wrap;
   }
   
@@ -52,13 +50,40 @@ body {
     font-size: 1rem;
   }
 
+
+  /* Submenu di navigazione */
+
+  .sub-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .sub-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    background: #eee;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .sub-btn:hover {
+    background: #ddd;
+  }
+  
+
   
   /* Contenuto menu */
   .menu-item {
     background: #fff;
     margin: 1rem;
     padding: 1rem;
-    min-height: 1.5em;
+    min-height: 100px;
     border: 1px solid #eee;
     border-radius: 8px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.1);
@@ -78,6 +103,10 @@ body {
 
   /* INFO E ORARI  */
 
+  .hours{
+    display: flex;
+  }
+
   #extra-info {
     margin: 20px 0;
     display: flex;
@@ -90,8 +119,8 @@ body {
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9;
+    color: black;
   }
-
 
   #cucina-info {
     margin-top: 20px;

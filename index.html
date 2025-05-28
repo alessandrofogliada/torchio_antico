@@ -7,11 +7,28 @@
 </head>
 <body>
   <header>
-    <h1>Menu Pizzeria</h1>
-    <div class="language-selector">
-      <button onclick="setLanguage('it')">🇮🇹 IT</button>
-      <button onclick="setLanguage('en')">🇬🇧 EN</button>
-      <button onclick="setLanguage('de')">🇩🇪 DE</button>
+    <div style="width: 100%;">
+        <h1>Menu Pizzeria</h1>
+        <div class="language-selector">
+            <button onclick="setLanguage('it')">🇮🇹 IT</button>
+            <button onclick="setLanguage('en')">🇬🇧 EN</button>
+            <button onclick="setLanguage('de')">🇩🇪 DE</button>
+        </div>
+    </div>
+
+     <!-- orario pizzeria e cucina -->
+     <div class="hours">
+        <div class="info-box">
+            <h3>🕐 Orari Pizzeria</h3>
+            <p>Pranzo: 12:00 - 14:30</p>
+            <p>Cena: 19:00 - 23:30</p>
+        </div>
+    
+        <div class="info-box">
+            <h3>👨‍🍳 Orari Cucina</h3>
+            <p>Pranzo: 12:00 - 14:30</p>
+            <p>Cena: 19:00 - 22:30</p>
+        </div>
     </div>
   </header>
 
@@ -29,28 +46,17 @@
             <button class="nav-btn" data-cat="Amari">Amari</button>
         </nav>
 
+        <!-- Barra secondaria di navigazione -->
+        <div id="subcategories-bar" class="sub-nav" style="display: none;"></div>
+
+
         <!-- Riquadri info Pizze e Oltre alla Pizza -->
         <div id="extra-info" style="display: none;">
-            <div class="info-box">
-            <h3>🕐 Orari Pizzeria</h3>
-            <p>Pranzo: 12:00 - 14:30</p>
-            <p>Cena: 19:00 - 23:30</p>
-            </div>
-        
             <div class="info-box">
             <h3>ℹ️ Info</h3>
             <p>Tutte le pizze possono essere fatte con impasto integrale (+1,00€) o carbone (+1,50€).</p>
             </div>
         </div>
-        
-        <!-- Riquadri info Cucina -->
-        <div id="cucina-info" style="display: none;">
-            <div class="info-box">
-              <h3>👨‍🍳 Orari Cucina</h3>
-              <p>Pranzo: 12:00 - 14:30</p>
-              <p>Cena: 19:00 - 22:30</p>
-            </div>
-          </div>
           
         <!-- Contenitore dove stampare il contenuto -->
         <div id="menu-content"></div>
