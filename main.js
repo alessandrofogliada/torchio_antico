@@ -145,14 +145,25 @@ document.addEventListener("DOMContentLoaded", () => {
       
           for (const [subCat, subItems] of Object.entries(grouped)) {
             html += `<h2 id="cat-${subCat.replace(/\s+/g, "-")}">${subCat}</h2>`;
-            html += subItems.map(item => `
-              <div class="menu-item">
-                <h3>${item.Nome}</h3>
-                <p>${item.Ingredienti || ""}</p>
-                <p><strong>€${item.Prezzo}</strong></p>
-                ${item.Allergeni ? `<p><em>Allergeni: ${item.Allergeni}</em></p>` : ""}
-              </div>
-            `).join("");
+            html += subItems.map(item => {
+                const isBibitaSpina = sheetName === "Bevande" && item.Categoria?.toLowerCase() === "bibitespina";
+              
+                const prezziSpina = isBibitaSpina ? `
+                  ${item["Prezzo Piccola"] ? `<p>Piccola ${item["Prezzo Piccola"]}€</p>` : ""}
+                  ${item["Prezzo Media"] ? `<p>Media ${item["Prezzo Media"]}€</p>` : ""}
+                  ${item["Prezzo Grande"] ? `<p>Grande ${item["Prezzo Grande"]}€</p>` : ""}
+                ` : `<p><strong>€${item.Prezzo}</strong></p>`;
+              
+                return `
+                  <div class="menu-item">
+                    <h3>${item.Nome}</h3>
+                    ${item.Ingredienti && !isBibitaSpina ? `<p>${item.Ingredienti}</p>` : ""}
+                    ${prezziSpina}
+                    ${item.Allergeni ? `<p><em>Allergeni: ${item.Allergeni}</em></p>` : ""}
+                  </div>
+                `;
+              }).join("");
+              
           }
         }
       
