@@ -26,6 +26,31 @@ body {
     background: #f3f3f3;
   }
 
+  /* FONTS */
+  @font-face {
+    font-family: 'Rye';
+    src: url('/fonts/Rye-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Arimo';
+    src: url('/fonts/Arimo-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  /* Applica i font */
+  h1, h2, h3, h4, h5 {
+    font-family: 'Rye', cursive;
+  }
+  
+  body, p, li, .menu-item {
+    font-family: 'Arimo', sans-serif;
+  }
+  
+
 
   
   /* Bottoni del menu */
