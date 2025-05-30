@@ -54,9 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
           });
       
           for (const [region, types] of Object.entries(grouped)) {
-            html += `<h2>${region}</h2>`;
+            html += `<h2 style="text-align: center;font-size: 45px;background-color:#7d0a0a;color: white;width: 80%;margin: 30px auto;min-height: 85px;padding-top: 20px;">${region}</h2>`;
             for (const [type, wines] of Object.entries(types)) {
-              html += `<h3>${type}</h3>`;
+              html += `<h3 style="text-align: center; font-size: 40px;" >${type}</h3>`;
               html += wines.map(item => `
                 <div class="menu-item">
                   <h3>${item.Nome}</h3>
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
       
         const showFixedTitle = customTitles[sheetName];
         if (showFixedTitle) {
-          html += `<h2>${showFixedTitle}</h2>`;
+          html += `<h2 style="text-align: center; font-size: 45px;">${showFixedTitle}</h2>`;
         }
       
         if (!skipSubcats.includes(sheetName)) {
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
         for (const [subCat, subItems] of Object.entries(grouped)) {
           const hideHeader = skipSubcats.includes(sheetName) && subCat === "Altro";
           if (!hideHeader) {
-            html += `<h2 id="cat-${subCat.replace(/\s+/g, "-")}">${subCat}</h2>`;
+            html += `<h2 style="text-align: center; font-size: 45px;" id="cat-${subCat.replace(/\s+/g, "-")}" >${subCat}</h2>`;
           }
       
           html += subItems.map(item => {
@@ -138,17 +138,27 @@ document.addEventListener("DOMContentLoaded", () => {
               <div class="info-box">
                 <h5>ℹ️Personalizza la tua piadipizza partendo dalla base</h5>
                 <p>- Piadipizza base (Impasto + Mozzarella) 7,50€</p>
-                <ul>
-                <li>Ingrediente</li>
-                <li>Ingrediente</li>
-                <li>Ingrediente</li>
-                <li>Ingrediente</li>
-                <li>Ingrediente</li>
-                <li>Ingrediente</li>
-                <li>Ingrediente</li>
-                <li>Ingrediente</li>
-                <li>Ingrediente</li>
-                </ul>
+                <div style="display:flex;width: 90%;justify-content: space-evenly;">
+                    <p>ingediente</p>
+                    <p>ingediente</p>
+                    <p>ingediente</p>
+                    <p>ingediente</p>
+                </div>
+
+                <div style="display:flex;width: 90%;justify-content: space-evenly;">
+                    <p>ingediente</p>
+                    <p>ingediente</p>
+                    <p>ingediente</p>
+                    <p>ingediente</p>                 
+
+                </div>
+
+                <div style="display:flex;width: 90%;justify-content: space-evenly;">
+                    <p>ingediente</p>
+                    <p>ingediente</p>
+                    <p>ingediente</p>
+                    <p>ingediente</p>
+                </div>
               </div>
             `;
           }
