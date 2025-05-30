@@ -9,30 +9,32 @@
   <header>
     <div class="up-header" style="width: 100%;">
         <img src="img/Logo Torchio Antico.svg" alt="">
-        <div class="language-selector">
-            <button onclick="setLanguage('it')">🇮🇹 IT</button>
-            <button onclick="setLanguage('en')">🇬🇧 EN</button>
-            <button onclick="setLanguage('de')">🇩🇪 DE</button>
-        </div>
+    
+        <select id="language-select">
+            <option value="it">Italiano 🇮🇹 </option>
+            <option value="en">English 🇬🇧</option>
+            <option value="de">Deutsch 🇩🇪</option>
+          </select>
+      
     </div>
 
      <!-- orario pizzeria e cucina -->
      <div class="hours">
         <div class="info-box-hours">
-            <h3 style="color: black;">🕐 Orari Pizzeria</h3>
-            <p>Pranzo: 12:00 - 14:30</p>
-            <p>Cena: 19:00 - 23:30</p>
+            <h3 style="color: black;" data-translate="orariPizzeria">🕐 Orari Pizzeria</h3>
+            <p data-translate="pranzo">Pranzo: 12:00 - 14:30</p>
+            <p data-translate="cenaCucina">Cena: 19:00 - 00:00</p>        
         </div>
     
         <div class="info-box-hours">
-            <h3 style="color: black;">👨‍🍳 Orari Cucina</h3>
-            <p>Pranzo: 12:00 - 14:30</p>
-            <p>Cena: 19:00 - 22:30</p>
+            <h3 style="color: black;" data-translate="orariCucina">👨‍🍳 Orari Cucina</h3>
+            <p data-translate="pranzo">Pranzo: 12:00 - 14:30</p>
+            <p data-translate="cenaCucina">Cena: 19:00 - 22:30</p>        
         </div>
     </div>
 
     <div class="coperto">
-        <h2>Coperto 2,50€</h2>
+        <h2 data-translate="coperto">Coperto 2,50€</h2>
     </div>
 
   </header>
@@ -40,15 +42,15 @@
   <main>
             <!-- Barra di navigazione tra le categorie -->
         <nav class="main-nav">
-            <button class="nav-btn" data-cat="Pizze">Pizze</button>
-            <button class="nav-btn" data-cat="OltreAllaPizza">Oltre alla pizza</button>
-            <button class="nav-btn" data-cat="Cucina">Cucina</button>
-            <button class="nav-btn" data-cat="Bambini">Per i Vostri Bambini</button>
-            <button class="nav-btn" data-cat="Dessert">Dessert</button>
-            <button class="nav-btn" data-cat="Bevande">Bevande</button>
-            <button class="nav-btn" data-cat="Birre">Birra</button>
-            <button class="nav-btn" data-cat="Vino">Vino</button>
-            <button class="nav-btn" data-cat="Amari">Amari</button>
+            <button class="nav-btn" data-translate="Pizze" data-cat="Pizze">Pizze</button>
+            <button class="nav-btn" data-translate="OltreAllaPizza" data-cat="OltreAllaPizza">Oltre alla pizza</button>
+            <button class="nav-btn" data-translate="Cucina" data-cat="Cucina">Cucina</button>
+            <button class="nav-btn" data-translate="Bambini"  data-cat="Bambini">Per i Vostri Bambini</button>
+            <button class="nav-btn" data-translate="Dessert"  data-cat="Dessert">Dessert</button>
+            <button class="nav-btn" data-translate="Bevande"  data-cat="Bevande">Bevande</button>
+            <button class="nav-btn" data-translate="Birre"  data-cat="Birre">Birra</button>
+            <button class="nav-btn" data-translate="Vino"  data-cat="Vino">Vino</button>
+            <button class="nav-btn" data-translate="Amari"  data-cat="Amari">Amari</button>
         </nav>
 
         <!-- Barra secondaria di navigazione -->
@@ -58,10 +60,16 @@
         <!-- Riquadri info Pizze e Oltre alla Pizza -->
         <div id="extra-info" style="display: none;">
             <div class="info-box">
-            <h3 style="font-size: 2rem;">ℹ️  Info</h3>
-            <p style="font-size: 1,8rem; padding: 0 15px 0;">Tutte le pizze possono essere fatte con impasto integrale (+1,00€) o carbone (+1,50€).</p>
+            <h3 style="font-size: 2rem; color: black;" >ℹ️  Info</h3>
+            <p style="font-size: 1,8rem; padding: 0 15px 0;" data-translate="impasti">Tutte le pizze possono essere fatte con impasto integrale (+1,00€) o carbone (+1,50€).</p>
             </div>
         </div>
+
+        <div id="loader" style="display: none; text-align: center; padding: 2rem;">
+            <img src="img/loader.svg" alt="pizza" class="spinner">
+            <h5 data-translate="loading" style="color: white; font-size: 25px;">Caricamento intorno..</h5>
+        </div>
+                  
           
         <!-- Contenitore dove stampare il contenuto -->
         <div id="menu-content"></div>

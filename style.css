@@ -20,6 +20,7 @@ body {
     justify-content: space-around;
     align-items: center;
     background-color: #eeeeee;
+    padding: 15px 10px;
   }
   
   header img{
@@ -89,11 +90,12 @@ body {
   }
 
 
-  .language-selector button {
-    margin: 0 5px;
+  #language-select{
+    min-height: 35px;
+    min-width: 60px;
+    font-size:20px;
     padding: 0.5rem;
-    font-size: 2rem;
-  }
+}
 
   /* Submenu di navigazione */
 
@@ -197,7 +199,22 @@ body {
     width: 100%;
     text-align: center;
   }
-  
+
+
+  /* LOADER  */
+
+  .spinner {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite;
+    margin: 0 auto;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
   /* 🔻 MEDIA QUERY PER MOBILE */
   @media (max-width: 768px) {
     header {
