@@ -6,23 +6,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const SHEET_URL = "https://script.google.com/macros/s/AKfycbwpcEWOR5wtfvM06Cc8W9eOApqWLl56O9nFLhAhnSlzhndR3zjvxAtZ1zM_GCbghNOw/exec";
     const sheetNames = [
       "Pizze", "OltreAllaPizza", "Cucina", "Bambini",
-      "Dessert", "Bevande", "Birre", "Vino", "Amari"
+      "Dessert", "Bevande", "Birre", "Amari"
     ];
   
     let allMenuData = {};
     let currentLang = "it";
+    let translations = {};
   
     // 📘 Traduzioni statiche
     async function loadTranslations(lang) {
-      const res = await fetch("lang.json");
-      const translations = await res.json();
-      const dict = translations[lang] || translations["it"];
-  
-      document.querySelectorAll("[data-translate]").forEach(el => {
-        const key = el.dataset.translate;
-        if (dict[key]) el.textContent = dict[key];
-      });
-    }
+        const res = await fetch("lang.json");
+        const allLangs = await res.json();
+        translations = allLangs; // ✅ salva tutto nel globale
+      
+        const dict = allLangs[lang] || allLangs["it"];
+        document.querySelectorAll("[data-translate]").forEach(el => {
+          const key = el.dataset.translate;
+          if (dict[key]) el.textContent = dict[key];
+        });
+      }
+      
   
     // 🌐 Caricamento dinamico dei dati menu
     async function loadSheet(sheetName) {
@@ -53,37 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
   
       let html = "";
   
-      // 🍷 Gestione speciale Vino
-      if (sheetName === "Vino") {
-        const grouped = {};
-        items.forEach(item => {
-          const region = item.Regione || "Altre Regioni";
-          const type = item.Categoria || "Altro";
-          if (!grouped[region]) grouped[region] = {};
-          if (!grouped[region][type]) grouped[region][type] = [];
-          grouped[region][type].push(item);
-        });
-  
-        for (const [region, types] of Object.entries(grouped)) {
-          html += `<h2 style="text-align: center;font-size: 45px;background-color: brown;color: white;width: 80%;margin: 30px auto;min-height: 85px;padding-top: 20px;border: 2px black solid;">${region}</h2>`;
-          for (const [type, wines] of Object.entries(types)) {
-            html += `<h3 style="text-align: center; font-size: 40px;" >${type}</h3>`;
-            html += wines.map(item => `
-              <div class="menu-item">
-                <h3>${item[`Nome_${currentLang}`] || item.Nome}</h3>
-                ${item.Cantina ? `<p>${item.Cantina}</p>` : ""}
-                ${item[`Ingredienti_${currentLang}`] || item.Ingredienti ? `<p>${item[`Ingredienti_${currentLang}`] || item.Ingredienti}</p>` : ""}
-                <p><strong>€${item.Prezzo}</strong></p>
-                ${item.Allergeni ? `<p><em>Allergeni: ${item.Allergeni}</em></p>` : ""}
-              </div>
-            `).join("");
-          }
-        }
-  
-        menuContainer.innerHTML = html;
-        return;
-      }
-  
       // 🍽️ Logica generica
       const grouped = {};
       items.forEach(item => {
@@ -92,36 +64,43 @@ document.addEventListener("DOMContentLoaded", () => {
         grouped[cat].push(item);
       });
   
-      const skipSubcats = ["Pizze", "Bambini", "Dessert", "Amari"];
-      const customTitles = {
-        "Pizze": "Le nostre pizze",
-        "Bambini": "Per i Vostri Bambini",
-        "Dessert": "Dessert",
-        "Amari": "I nostri Amari",
-      };
-  
-      const showFixedTitle = customTitles[sheetName];
-      if (showFixedTitle) {
-        html += `<h2 style="text-align: center; font-size: 45px;">${showFixedTitle}</h2>`;
-      }
+      const skipSubcats = ["Pizze","Antipasti", "Bambini", "Dessert", "Amari"];
+
+        // Recupera la chiave di traduzione (es: "title_Pizze")
+        const titleKey = `title_${sheetName}`;
+        const translatedTitle = translations[currentLang]?.[titleKey] || "";
+
+        // Se esiste una traduzione per quel titolo, mostrala
+        if (translatedTitle) {
+        html += `<h2 style="text-align: center; font-size: 45px;">${translatedTitle}</h2>`;
+        }
+
   
       if (!skipSubcats.includes(sheetName)) {
         subcategoryBar.style.display = "flex";
         Object.keys(grouped).forEach(cat => {
-          if (cat === "Altro") return;
-          const btn = document.createElement("button");
-          btn.textContent = cat;
-          btn.className = "sub-btn";
-          btn.addEventListener("click", () => scrollToSubcategory(cat));
-          subcategoryBar.appendChild(btn);
-        });
+            if (cat === "Altro") return;
+            const btn = document.createElement("button");
+          
+            const subKey = `sub_${cat}`;
+            const translated = translations[currentLang]?.[subKey] || cat;
+          
+            btn.textContent = translated;
+            btn.className = "sub-btn";
+            btn.addEventListener("click", () => scrollToSubcategory(cat));
+            subcategoryBar.appendChild(btn);
+          });
+          
       }
   
       for (const [subCat, subItems] of Object.entries(grouped)) {
         const hideHeader = skipSubcats.includes(sheetName) && subCat === "Altro";
         if (!hideHeader) {
-          html += `<h2 style="text-align: center; font-size: 45px;" id="cat-${subCat.replace(/\s+/g, "-")}" >${subCat}</h2>`;
-        }
+            const subKey = `sub_${subCat}`;
+            const translatedSub = translations[currentLang]?.[subKey] || subCat;
+            html += `<h2 style="text-align: center; font-size: 45px;" id="cat-${subCat.replace(/\s+/g, "-")}">${translatedSub}</h2>`;
+          }
+          
   
         html += subItems.map(item => {
           const name = item[`Nome_${currentLang}`] || item.Nome;
@@ -147,26 +126,42 @@ document.addEventListener("DOMContentLoaded", () => {
   
         // Extra info
         if (sheetName === "OltreAllaPizza" && subCat.toLowerCase() === "piadipizze") {
-          html += `
-            <div class="info-box">
-              <h4>ℹ️Personalizza la tua piadipizza partendo dalla base</h4>
-              <strong>Piadipizza base (Impasto + Mozzarella) 7,50€</strong>
-              <div style="display:flex;width: 90%;justify-content: space-evenly;">
-                  <p>ingediente</p><p>ingediente</p><p>ingediente</p><p>ingediente</p>
+            const ingredients = translations[currentLang]?.piadipizza_ingredients || [];
+            function chunkArray(arr, size) {
+                const res = [];
+                for (let i = 0; i < arr.length; i += size) {
+                  res.push(arr.slice(i, i + size));
+                }
+                return res;
+              }
+              
+              const ingredientRows = chunkArray(ingredients, 3).map(group => `
+                <div style="display: flex; width: 90%; justify-content: space-evenly; flex-wrap: nowrap; gap: 10px; margin-top: 5px;">
+                  ${group.map(i => `<p style="flex: 1; text-align: center;">${i}</p>`).join("")}
+                </div>
+              `).join("");
+              
+          
+              html += `
+              <div class="info-box">
+                <h4>${translations[currentLang]?.piadipizza_info_title || ""}</h4>
+                <strong>${translations[currentLang]?.piadipizza_base || ""}</strong>
+                ${ingredientRows}
               </div>
-            </div>
-          `;
-        }
+            `;            
+          }
+          
   
         if (sheetName === "Dessert") {
-          html += `
-            <div class="info-box">
-              <h5>🍰 Possibilità di aggiunta:</h5>
-              <p>- Panna montata (+1€)</p><br>
-              <p>- Topping: cioccolato, caramello, frutti di bosco</p>
-            </div>
-          `;
-        }
+            html += `
+              <div class="info-box">
+                <h5>${translations[currentLang]?.dessert_info_title || ""}</h5>
+                <p>${translations[currentLang]?.dessert_info_1 || ""}</p><br>
+                <p>${translations[currentLang]?.dessert_info_2 || ""}</p>
+              </div>
+            `;
+          }
+          
       }
   
       menuContainer.innerHTML = html;
@@ -190,6 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
     // 🖱️ Gestione cambio lingua
     document.getElementById("language-select").addEventListener("change", async (e) => {
+        e.preventDefault();
       currentLang = e.target.value;
       await loadTranslations(currentLang);
       const activeSheet = document.querySelector(".nav-btn.active")?.dataset.cat || "Pizze";
@@ -203,26 +199,34 @@ document.addEventListener("DOMContentLoaded", () => {
     // 🎯 Gestione clic su categoria
     buttons.forEach(btn => {
         btn.addEventListener("click", async () => {
-        buttons.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        const sheetName = btn.dataset.cat;
-    
-        showLoader();
-        await loadSheet(sheetName);
-        renderCategory(sheetName);
-        hideLoader();
-        });
-    });
-  
+          buttons.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          const sheetName = btn.dataset.cat;
       
+          localStorage.setItem("currentSheet", sheetName); 
+      
+          showLoader();
+          await loadSheet(sheetName);
+          renderCategory(sheetName);
+          hideLoader();
+        });
+      });
+        
+      function hidePageLoader() {
+        const loader = document.getElementById("page-loader");
+        if (loader) loader.style.display = "none";
+      }
   
     // 🚀 Avvio
     (async () => {
-      await loadTranslations(currentLang);
-      await loadSheet("Pizze");
-      const firstBtn = document.querySelector(".nav-btn[data-cat='Pizze']");
-      if (firstBtn) firstBtn.classList.add("active");
-      renderCategory("Pizze");
-    })();
+        await loadTranslations(currentLang);
+        const savedSheet = localStorage.getItem("currentSheet") || "Pizze"; // 🟢 Usa salvato
+        await loadSheet(savedSheet);
+        const activeBtn = document.querySelector(`.nav-btn[data-cat="${savedSheet}"]`);
+        if (activeBtn) activeBtn.classList.add("active");
+        renderCategory(savedSheet);
+        hidePageLoader()
+      })();
+      
   });
   
