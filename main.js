@@ -108,18 +108,30 @@ document.addEventListener("DOMContentLoaded", () => {
           const isBibitaSpina = sheetName === "Bevande" && item.Categoria?.toLowerCase() === "bibitespina";
           const isBirraSpina = sheetName === "Birre" && item.Categoria?.toLowerCase() === "birra alla spina";
   
-          const prezziSpina = (isBibitaSpina || isBirraSpina) ? `
-            ${item["Prezzo Piccola"] ? `<p>Piccola ${item["Prezzo Piccola"]}€</p>` : ""}
-            ${item["Prezzo Media"] ? `<p>Media ${item["Prezzo Media"]}€</p>` : ""}
-            ${item["Prezzo Grande"] ? `<p>Grande ${item["Prezzo Grande"]}€</p>` : ""}
-          ` : `<p><strong>€${item.Prezzo}</strong></p>`;
+        //   const prezziSpina = (isBibitaSpina || isBirraSpina) ? `
+        //     ${item["Prezzo Piccola"] ? `<p class="prezzo">Piccola ${item["Prezzo Piccola"]}€</p>` : ""}
+        //     ${item["Prezzo Media"] ? `<p class="prezzo">Media ${item["Prezzo Media"]}€</p>` : ""}
+        //     ${item["Prezzo Grande"] ? `<p class="prezzo">Grande ${item["Prezzo Grande"]}€</p>` : ""}
+        //   ` : `<p class="prezzo"><strong>€${item.Prezzo}</strong></p>`;
+
+        const dict = translations[currentLang] || translations["it"];
+            const labelPiccola = dict.size_small || "Piccola";
+            const labelMedia = dict.size_medium || "Media";
+            const labelGrande = dict.size_large || "Grande";
+
+            const prezziSpina = (isBibitaSpina || isBirraSpina) ? `
+            ${item["Prezzo Piccola"] ? `<p class="prezzo">${labelPiccola} ${item["Prezzo Piccola"]}€</p>` : ""}
+            ${item["Prezzo Media"] ? `<p class="prezzo">${labelMedia} ${item["Prezzo Media"]}€</p>` : ""}
+            ${item["Prezzo Grande"] ? `<p class="prezzo">${labelGrande} ${item["Prezzo Grande"]}€</p>` : ""}
+            ` : `<p class="prezzo"><strong>€${item.Prezzo}</strong></p>`;
+
   
           return `
             <div class="menu-item">
               <h3>${name}</h3>
               ${ingredients && !(isBibitaSpina || isBirraSpina) ? `<p>${ingredients}</p>` : ""}
               ${prezziSpina}
-              ${item.Allergeni ? `<p><em>Allergeni: ${item.Allergeni}</em></p>` : ""}
+${item.Allergeni ? `<p><em>${translations[currentLang]?.allergens_label || "Allergeni"}: ${translateAllergensLabel(item.Allergeni)}</em></p>` : ""}
             </div>
           `;
         }).join("");
@@ -144,8 +156,9 @@ document.addEventListener("DOMContentLoaded", () => {
           
               html += `
               <div class="info-box">
-                <h4>${translations[currentLang]?.piadipizza_info_title || ""}</h4>
-                <strong>${translations[currentLang]?.piadipizza_base || ""}</strong>
+                <h3 style="color:black; width:75%">${translations[currentLang]?.piadipizza_info_title || ""}</h3>
+                <p >${translations[currentLang]?.piadipizza_base || ""}</p>
+                <p >${translations[currentLang]?.piadipizza_add || ""}</p>
                 ${ingredientRows}
               </div>
             `;            
@@ -155,8 +168,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (sheetName === "Dessert") {
             html += `
               <div class="info-box">
-                <h5>${translations[currentLang]?.dessert_info_title || ""}</h5>
-                <p>${translations[currentLang]?.dessert_info_1 || ""}</p><br>
+                <h3 style="color:black;">${translations[currentLang]?.dessert_info_title || ""}</h3>
+                <p style="font-size:2rem">${translations[currentLang]?.dessert_info_1 || ""}</p><br>
                 <p>${translations[currentLang]?.dessert_info_2 || ""}</p>
               </div>
             `;
@@ -211,6 +224,12 @@ document.addEventListener("DOMContentLoaded", () => {
           hideLoader();
         });
       });
+
+    //   Traduzione allergenti 
+      function translateAllergensLabel(text) {
+        const map = translations[currentLang]?.allergens_map || {};
+        return text.split(/,\s*/).map(item => map[item.trim()] || item.trim()).join(", ");
+      }      
         
       function hidePageLoader() {
         const loader = document.getElementById("page-loader");

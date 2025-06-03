@@ -17,14 +17,15 @@ body {
   .up-header{
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     background-color: #eeeeee;
     padding: 15px 10px;
   }
   
   header img{
-    width: 20%;
+    width: 70%;
     }
   
   /* Pulsanti categorie */
@@ -64,6 +65,14 @@ body {
   h1, h2, h3, h4, h5 {
     font-family: 'Rye', cursive;
   }
+
+  h2 , h3{
+    font-size: 3rem;
+  }
+
+  p{
+    font: 2rem;
+  }
   
   body, p, li, .menu-item {
     font-family: 'Arimo', sans-serif;
@@ -79,7 +88,7 @@ body {
     padding: 1rem;
     border: #bf3131;
     border-radius: 25px;
-    font-size: 2rem;
+    font-size: 2.5rem;
     background: #bf3131;
     color: white;
     cursor: pointer;
@@ -92,9 +101,9 @@ body {
 
   #language-select{
     min-height: 35px;
-    min-width: 60px;
-    font-size:20px;
-    padding: 0.5rem;
+    min-width: 110px;
+    font-size:35px;
+    padding: 1.5rem;
 }
 
   /* Submenu di navigazione */
@@ -112,7 +121,7 @@ body {
   .sub-btn {
     padding: 1rem;
     margin:10px ;
-    font-size: 1.8rem;
+    font-size: 2.5rem;
     background: white;
     color: #bf3131;
     border: none;
@@ -138,13 +147,12 @@ body {
   }
   
   .menu-item h3 {
-    font-size: 2rem;
     margin-bottom: 0.5rem;
     color: black;
   }
   
   .menu-item p {
-    font-size: 1.5rem;
+    font-size: 2.5em;
     margin: 0.25rem 0;
   }
   
@@ -162,7 +170,7 @@ body {
     background-color: white;
     color: black;
     width:48%;
-    font-size: 25px;
+    font-size: 2rem;
     border-radius: 25px;
     margin: 25px;
     display: flex;
@@ -187,7 +195,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 2rem;
     margin: 0 auto;
   }
 
@@ -198,6 +206,10 @@ body {
   .coperto{
     width: 100%;
     text-align: center;
+  }
+
+  .prezzo{
+    font-size: 40px;
   }
 
 
