@@ -44,6 +44,14 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderCategory(sheetName) {
       const items = allMenuData[sheetName];
       const extraInfo = document.getElementById("extra-info");
+
+       // Gestione visibilità info gelo
+    const geloBox = document.getElementById("gelo-info");
+    if (["Pizze", "OltreAllaPizza", "Cucina", "Bambini", "Dessert"].includes(sheetName)) {
+      geloBox.style.display = "block";
+    } else {
+      geloBox.style.display = "none";
+    }
   
       subcategoryBar.innerHTML = "";
       subcategoryBar.style.display = "none";
@@ -174,7 +182,7 @@ ${item.Allergeni ? `<p><em>${translations[currentLang]?.allergens_label || "Alle
               </div>
             `;
           }
-          
+
       }
   
       menuContainer.innerHTML = html;
@@ -186,9 +194,20 @@ ${item.Allergeni ? `<p><em>${translations[currentLang]?.allergens_label || "Alle
     }
 
     function showLoader() {
-        document.getElementById("loader").style.display = "block";
-        menuContainer.style.display = "none";
+      const loader = document.getElementById("loader");
+      const menuContainer = document.getElementById("menuContainer"); // Assicurati che questo ID sia corretto
+  
+      loader.style.display = "block";
+      if (menuContainer) {
+          menuContainer.style.display = "none";
       }
+  
+      // Scroll verso il loader dopo un breve ritardo
+      setTimeout(() => {
+          loader.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 100);
+  }
+  
       
       function hideLoader() {
         document.getElementById("loader").style.display = "none";
@@ -208,6 +227,7 @@ ${item.Allergeni ? `<p><em>${translations[currentLang]?.allergens_label || "Alle
       hideLoader();
       
     });
+
   
     // 🎯 Gestione clic su categoria
     buttons.forEach(btn => {

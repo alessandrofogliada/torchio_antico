@@ -33,7 +33,7 @@
     "piadipizza_info_title": "ℹ️ Personalizza la tua piadipizza partendo dalla base",
     "piadipizza_base": "Piadipizza base (Impasto + Mozzarella) 7,50€",
     "piadipizza_add": "Il costo di ogni aggiunta equivale ad 1€",
-    "piadipizza_ingredients": ["Tonno", "Cotto", "Crudo" , "Crema di Pistacchio", "Olive Nere", "Rucola","Bufala", "Burrata", "Ricotta"],
+    "piadipizza_ingredients": ["Tonno", "Cotto", "Crudo" , "Crema di Pistacchio", "Olive Nere", "Rucola","Bufala", "Burrata (1,50€)", "Ricotta"],
     "size_small": "Piccola",
     "size_medium": "Media",
     "size_large": "Grande",
@@ -53,7 +53,9 @@
     "Molluschi": "Molluschi",
     "Arachidi": "Arachidi"
     },
-    "allergens_label": "Allergeni" 
+    "allergens_label": "Allergeni" ,
+    "gelo_info_title": "❄️ Prodotto surgelato",
+    "gelo_info_text": "I piatti contrassegnati con * contengono ingredienti che potrebbero essere stati surgelati all’origine per garantirne la qualità e la conservazione."
 
     },
     "en": {
@@ -100,7 +102,7 @@
     "piadipizza_base": "Piadipizza base (Dough + Mozzarella) 7,50€",
     "piadipizza_add": "The cost of each addition equals 1€.",
     "piadipizza_ingredients": ["Tuna", "Cooked Ham", "Cured Ham", "Pistachio Cream",
-  "Black Olives", "Rocket", "Buffalo Mozzarella", "Burrata", "Ricotta"],
+  "Black Olives", "Rocket", "Buffalo Mozzarella", "Burrata (1,50€)", "Ricotta"],
     "size_small": "Small",
     "size_medium": "Medium",
     "size_large": "Large",
@@ -120,7 +122,9 @@
     "Molluschi": "Molluscs",
     "Arachidi": "Peanuts"
     },
-    "allergens_label": "Allergens"
+    "allergens_label": "Allergens",
+    "gelo_info_title": "❄️ Frozen product",
+    "gelo_info_text": "Dishes marked with * contain ingredients that may have been frozen at origin to ensure quality and preservation."
     },
     "de": {
       "orariPizzeria": "🕐 Pizzeriazeiten",
@@ -166,7 +170,7 @@
         "piadipizza_base": "Piadipizza Basis (Teig + Mozzarella) 7,50€ ",
         "piadipizza_add": "Die Kosten für jeden Zusatz betragen 1 €.",
         "piadipizza_ingredients": ["Thunfisch", "Gekochter Schinken", "Rohschinken", "Pistaziencreme",
-        "Schwarze Oliven", "Rucola", "Büffelmozzarella", "Burrata", "Ricotta"],
+        "Schwarze Oliven", "Rucola", "Büffelmozzarella", "Burrata (1,50€)", "Ricotta"],
         "size_small": "Klein",
         "size_medium": "Mittel",
         "size_large": "Groß",
@@ -186,7 +190,9 @@
         "Molluschi": "Weichtiere",
         "Arachidi": "Erdnüsse"
         },
-        "allergens_label": "Allergene" 
+        "allergens_label": "Allergene",
+        "gelo_info_title": "❄️ Gefrorene Produkte",
+        "gelo_info_text": "Die mit * gekennzeichneten Gerichte enthalten Zutaten, die aus Qualitäts- und Konservierungsgründen eingefroren wurden." 
     }
   }
   
