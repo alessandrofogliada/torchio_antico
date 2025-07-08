@@ -110,6 +110,11 @@ body {
     padding: 1.5rem;
 }
 
+.orari{
+  font-size: 35px;
+  color: black;
+}
+
   /* Submenu di navigazione */
 
   .sub-nav {
@@ -291,4 +296,49 @@ body {
       margin: 1rem 0.5rem;
     }
   }
-  
+
+    /* 🔻 MEDIA QUERY PER DESKTOP */
+    @media (min-width: 769px) {
+      header img{
+        width: 30%;
+        }
+
+      #language-select {
+          min-height: 65px;
+          min-width: 180px;
+          font-size: 35px;
+          padding: 0.5rem;
+        }
+
+        .info-box-hours{
+          width: 40%;
+          font-size: 2rem;
+        }
+
+        .orari{
+          font-size: 25px;
+          color: black;
+        }
+      
+      .coperto h2{
+        font-size: 1rem;
+      }
+
+      .nav-btn{
+        font-size: 2rem;
+      }
+
+      .sub-btn{
+        font-size: 2rem;
+      }
+      
+      .menu-item{
+        width: 90%;
+        margin: 1rem auto;
+      }
+
+      .spinner{
+        width: 150px;
+        height: 150px;
+      }
+  }
